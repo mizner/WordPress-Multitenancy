@@ -1,7 +1,8 @@
 
 
 ##
-`bash /var/www/setup/sites.nginx.sh`
+* `bash /var/www/setup/sites.nginx.sh`
+* `vagrant ssh -c "bash /var/www/setup/sites.nginx.sh"`
 
 
 ## [Digital Ocean CLI](https://github.com/digitalocean/doctl)
