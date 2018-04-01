@@ -1,0 +1,13 @@
+{
+    "sites": [
+        {
+            "url": "site1.test"
+        },
+        {
+            "url": "site2.test"
+        },
+        {
+            "url": "site3.test"
+        }
+    ]
+}
