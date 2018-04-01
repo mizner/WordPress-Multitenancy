@@ -52,9 +52,15 @@ sudo apt-get install -y software-properties-common
 
 if [ $INSTALL_CORE_ADDONS == 1 ]; then
     # sudo apt-get -y install vim
-    sudo apt-get install zsh
     sudo apt-get -y install git-core
-    sudo apt-get install jq # JSON Tools https://stedolan.github.io/jq/download/
+
+    # Zsh
+    sudo apt-get -y install zsh
+    wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh 
+    sudo chsh -s /bin/zsh vagrant
+
+    # JQ JSON tools
+    sudo apt-get -y install jq # JSON Tools https://stedolan.github.io/jq/download/
 fi
 
 # Weird Vagrant issue fix
@@ -69,22 +75,6 @@ sudo systemctl enable nginx
 
 # Remove "html" and add public
 sudo mv /var/www/html /var/www/public
-
-# Make sure your web server knows you did this...
-MY_WEB_CONFIG='server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/public;
-    index index.html index.htm index.nginx-debian.html;
-
-    server_name _;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}'
-echo "$MY_WEB_CONFIG" | sudo tee /etc/nginx/sites-available/default
 
 sudo systemctl restart nginx
 
