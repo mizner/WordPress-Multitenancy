@@ -4,6 +4,7 @@
 # Ngnix
 nginx/sites-available/*
 !nginx/sites-available/default
+!nginx/sites-available/example
 
 # Sites
 /public/*
