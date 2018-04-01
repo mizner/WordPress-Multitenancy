@@ -9,32 +9,38 @@
 SITES_OBJECT=$(cat sites.json | jq -r  '.sites')
 SITES_COUNT=$( echo $SITES_OBJECT | jq '. | length' )
 
-echo $SITES_OBJECT
-exit 1
+PATH_NGNIX_SITES_AVAILABLE='/etc/nginx/sites-available'
+PATH_SITE_DIR='/var/www/public/'
 
-PATH_NGNIX_SITES_AVAILABLE = '/etc/nginx/sites-available'
-
-function getObjectItem() {
+function getObjectItem () {
     local row=$1
     local key=$2
 
-    local result=$(echo ${row} | jq -r '.url');
+    local result=$(echo $row | jq -r '.url')
 
     echo $result
 }
 
+
 function createNgnixBlockFile(){
-    local siteUrl=$1
-    local path=$PATH_NGNIX_SITES_AVAILABLE
-    sudo cp "$path/default" "$path/$siteUrl"
+    local siteUrl=$1;
+    local path=$PATH_NGNIX_SITES_AVAILABLE;
+    echo $path;
+    # sudo cp "$path/default" "$path/$siteUrl"
 }
 
 function siteSetup(){
     local row=$(echo $1 | base64 --decode )
-    local url=getObjectItem $row url
 
+    # local siteUrl=getObjectItem $row url
+
+    # 1. Create Ngnix Block File
+    # DIE createNgnixBlockFile $row
+
+    # 2. Create Site Directory
+    # DIE mkdir "$PATH_SITE_DIR/$siteUrl"
 }
 
 for row in $(echo "$SITES_OBJECT" | jq -r '.[]  | @base64'); do
-    # siteSetup $row
+    siteSetup $row
 done
