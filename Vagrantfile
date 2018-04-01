@@ -21,6 +21,8 @@ Vagrant.configure("2") do |config|
         mount_options: ['dmode=777', 'fmode=666']
     config.vm.synced_folder "./nginx/sites-available", "/etc/nginx/sites-available", 
         id: "ngnix_sites_available"
+    config.vm.synced_folder "./nginx/sites-enabled", "/etc/nginx/sites-enabled", 
+        id: "ngnix_sites_enabled"
     config.ssh.insert_key = false
     config.vm.provision "shell", path: "setup/initial.sh", privileged: false
 
