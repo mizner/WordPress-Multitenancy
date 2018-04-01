@@ -2,7 +2,7 @@
 /.vagrant
 
 # Ngnix
-nginx/sites-available/*
+nginx/*
 !nginx/sites-available/default
 !nginx/sites-available/example
 
