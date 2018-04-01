@@ -1,2 +1,11 @@
 .DS_Store
 /.vagrant
+
+# Ngnix
+nginx/sites-available/*
+!nginx/sites-available/default
+
+# Sites
+/public/*
+!/public/example
+
