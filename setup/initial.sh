@@ -52,9 +52,9 @@ sudo apt-get install -y software-properties-common
 
 if [ $INSTALL_CORE_ADDONS == 1 ]; then
     # sudo apt-get -y install vim
-    # sudo apt-get -y install git
+    sudo apt-get install zsh
+    sudo apt-get -y install git-core
     sudo apt-get install jq # JSON Tools https://stedolan.github.io/jq/download/
-    sudo apt-get install php-xdebug # http://www.dieuwe.com/blog/xdebug-ubuntu-1604-php7 (x-debug instructions)
 fi
 
 # Weird Vagrant issue fix
@@ -181,6 +181,8 @@ if [ $INSTALL_PHP_ADDONS == 1 ]; then
     # IMAGE MAGIC
     sudo apt-get -y install imagemagick
     sudo apt-get -y install php7.2-imagick
+
+    # sudo apt-get install php-xdebug # http://www.dieuwe.com/blog/xdebug-ubuntu-1604-php7 (x-debug instructions)
 fi
 
 # /*===========================================
