@@ -43,21 +43,3 @@ sudo apt-get -y install php7.2-imagick
 
 # X-Debug
 sudo apt-get install php-xdebug # http://www.dieuwe.com/blog/xdebug-ubuntu-1604-php7 (x-debug instructions)
-
-# /*==============================
-# =            WP-CLI            =
-# ==============================*/
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-sudo chmod +x wp-cli.phar
-sudo mv wp-cli.phar /usr/local/bin/wp
-
-# /*================================
-# =            COMPOSER            =
-# ================================*/
-EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
-php composer-setup.php --quiet
-rm composer-setup.php
-sudo mv composer.phar /usr/local/bin/composer
-sudo chmod 755 /usr/local/bin/composer
