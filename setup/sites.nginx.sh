@@ -6,6 +6,11 @@
 
 # Requires jq to be installed https://stedolan.github.io/jq/
 
+red=`tput setaf 1`
+green=`tput setaf 2`
+cyan=`tput setaf 6`
+reset=`tput sgr0`
+
 PATH_NGNIX='/etc/nginx'
 PATH_ROOT='/var/www'
 PATH_SITE_DIR='/var/www/public'
@@ -22,24 +27,37 @@ function getObjectItem () {
     echo $result
 }
 
-function createNgnixBlockFile(){
-    local siteUrl=$1
+function ngnixCreateBlockFile(){
     local pathAvailable="$PATH_NGNIX/sites-available"
-    local pathEnabled="$PATH_NGNIX/sites-enabled"
-    
+
     sudo cp "$pathAvailable/example" "$pathAvailable/$siteUrl"
     sed -i "s|@SITE_URL|$siteUrl|g" "$pathAvailable/$siteUrl"
+
+}
+
+function ngnixEnableSite(){
+    local siteUrl=$1
+    local pathEnabled="$PATH_NGNIX/sites-enabled"
+    # Create symbolic links
     sudo ln -sf "$pathAvailable/$siteUrl" "$pathEnabled/"
 }
-
-function createSiteDirectory(){
+function directoryPublicCreate(){
     local siteUrl=$1
-    cp -rf "$PATH_SITE_DIR/example" "$PATH_SITE_DIR/$siteUrl"
+    cp -TR "$PATH_SITE_DIR/example" "$PATH_SITE_DIR/$siteUrl"
 }
 
-function cleanNgnix(){
+function directoryPublicClean(){
+    rm -r /var/www/public/*/
+}
+
+function ngnixCleanAvailable(){
+    local pathAvailable="$PATH_NGNIX/sites-available"
+    ## todo fix this (NOT WORKING)
+    ## find . ! -name 'file.txt' -type f -exec rm -f {} +
+}
+function ngnixCleanEnabled(){
     local pathEnabled="$PATH_NGNIX/sites-enabled"
-    rm -f "$pathEnabled/*"
+    rm -r /etc/nginx/sites-enabled/*
 }
 
 function siteSetup(){
@@ -47,21 +65,22 @@ function siteSetup(){
 
     local siteUrl=$(getObjectItem $row url)
 
-    # Clean ngnix/sites-enabled directory
-    cleanNgnix
-
-    # 1. Create Ngnix Block File
-    createNgnixBlockFile $siteUrl
-
-    # 2. Create Site Directory
-    createSiteDirectory $siteUrl
+    echo "Create ${green}{$siteUrl}${reset}"
+    ngnixCreateBlockFile $siteUrl
+    ngnixEnableSite $siteUrl
+    directoryPublicCreate $siteUrl
 }
 
+#echo "Clean Site Directory"
+#directoryPublicClean
+echo "Clean NGNIX Sites Enabled"
+ngnixCleanEnabled
+
+echo "Create Sites"
 for row in $(echo "$SITES_OBJECT" | jq -r '.[]  | @base64'); do
     siteSetup $row
 done
 
+echo "Finishing up"
 sudo systemctl restart php7.2-fpm
 sudo systemctl restart nginx
-# journalctl -xe
-# systemctl status nginx.service
