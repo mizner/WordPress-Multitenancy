@@ -4,6 +4,12 @@
 * `bash /var/www/setup/sites.nginx.sh`
 * `vagrant ssh -c "bash /var/www/setup/sites.nginx.sh"`
 
+## Restart NGNIX
+`sudo systemctl reload nginx && sudo systemctl restart php7.2-fpm`
+
+## NGNIX Log
+`tail -f /var/log/nginx/error.log`
+
 
 ## [Digital Ocean CLI](https://github.com/digitalocean/doctl)
 Droplet: `87951788`
