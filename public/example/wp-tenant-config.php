@@ -1,6 +1,12 @@
 <?php
+if (defined('WP_CLI') && WP_CLI) {
+    define('DB_HOST', SL_DB_IP.':'.SL_DB_PORT); // Allows using WP CLI without having to SSH
+} else {
+    define('DB_HOST', 'localhost'); // https://github.com/wp-cli/wp-cli/issues/2431#issuecomment-178568416
+}
+
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'wp1.test');
+define('DB_NAME', '@SITE_URL');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
 define('DB_CHARSET', 'utf8mb4');
