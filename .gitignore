@@ -1,6 +1,7 @@
 .idea
 .DS_Store
 /.vagrant
+debug.log
 
 # Ngnix
 nginx/*
@@ -9,6 +10,10 @@ nginx/*
 !nginx/sites-available/example.ngnix.default
 
 # Sites
-/public/*
-!/public/example
+/public/sites/*
+/public/core/*
+!/public/core/wp-config.php
+
+/public/plugins
+/public/themes
 

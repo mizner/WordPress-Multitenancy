@@ -46,11 +46,11 @@ function ngnixEnableSite(){
 
 function directoryPublicCreate(){
     local siteUrl=$1
-    cp -TR "$PATH_SITE_DIR/example" "$PATH_SITE_DIR/$siteUrl"
+    cp -TR "$PATH_SITE_DIR/example" "$PATH_SITE_DIR/sites/$siteUrl"
 }
 
 function directoryPublicClean(){
-    sudo rm -r /var/www/public/*/
+    sudo rm -rf /var/www/public/sites/*
 }
 
 function ngnixCleanAvailable(){
@@ -63,6 +63,10 @@ function ngnixCleanEnabled(){
     sudo rm -r /etc/nginx/sites-enabled/*
 }
 
+function wpCreateDB(){
+    local siteUrl=$1
+    wp db create
+}
 function siteSetup(){
     local row=$(echo $1 | base64 --decode )
 
@@ -72,6 +76,10 @@ function siteSetup(){
     ngnixCreateBlockFile $siteUrl
     ngnixEnableSite $siteUrl
     directoryPublicCreate $siteUrl
+
+    sudo ln -sf /var/www/public/core /var/www/public/sites/$siteUrl
+    sudo ln -sf /var/www/public/themes /var/www/public/sites/$siteUrl
+    sudo ln -sf /var/www/public/plugins /var/www/public/sites/$siteUrl
 }
 
 #echo "Clean Site Directory"

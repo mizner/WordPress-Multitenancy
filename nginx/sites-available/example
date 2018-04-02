@@ -5,7 +5,7 @@ server {
 
     server_name @SITE_URL www.@SITE_URL;
 
-    root /var/www/public/@SITE_URL;
+    root /var/www/public/sites/@SITE_URL;
     index index.php index.html;
 
     location / {
