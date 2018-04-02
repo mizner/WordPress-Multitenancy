@@ -29,7 +29,7 @@ function createNgnixBlockFile(){
     
     sudo cp "$pathAvailable/example" "$pathAvailable/$siteUrl"
     sed -i "s|@SITE_URL|$siteUrl|g" "$pathAvailable/$siteUrl"
-    sudo ln -s "$pathAvailable/$siteUrl" "$pathEnabled/"
+    sudo ln -sf "$pathAvailable/$siteUrl" "$pathEnabled/"
 }
 
 function createSiteDirectory(){
@@ -37,10 +37,18 @@ function createSiteDirectory(){
     cp -rf "$PATH_SITE_DIR/example" "$PATH_SITE_DIR/$siteUrl"
 }
 
+function cleanNgnix(){
+    local pathEnabled="$PATH_NGNIX/sites-enabled"
+    rm -f "$pathEnabled/*"
+}
+
 function siteSetup(){
     local row=$(echo $1 | base64 --decode )
 
     local siteUrl=$(getObjectItem $row url)
+
+    # Clean ngnix/sites-enabled directory
+    cleanNgnix
 
     # 1. Create Ngnix Block File
     createNgnixBlockFile $siteUrl
@@ -55,3 +63,5 @@ done
 
 sudo systemctl restart php7.2-fpm
 sudo systemctl restart nginx
+# journalctl -xe
+# systemctl status nginx.service
