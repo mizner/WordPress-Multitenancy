@@ -1,25 +1,13 @@
 server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
+        listen 80;
+        listen [::]:80;
 
         root /var/www/@SITE_URL;
-        index index.php index.html index.htm index.nginx-debian.html;
+        index index.html index.htm index.nginx-debian.html;
 
         server_name @SITE_URL www.@SITE_URL;
 
-        location = /favicon.ico { access_log off; log_not_found off; }
-        location = /robots.txt  { access_log off; log_not_found off; }
-
         location / {
-            try_files $uri $uri/ /index.php?$query_string;
+                try_files $uri $uri/ =404;
         }
-
-        location ~ \.php$ {
-            include snippets/fastcgi-php.conf;
-            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
-        }
-
-        location ~ /\.ht {
-            deny all;
-        }
-    }
+}
