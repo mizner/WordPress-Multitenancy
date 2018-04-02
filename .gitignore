@@ -7,7 +7,6 @@ debug.log
 nginx/*
 !nginx/sites-available/default
 !nginx/sites-available/example
-!nginx/sites-available/example.ngnix.default
 
 # Sites
 /public/sites/*
