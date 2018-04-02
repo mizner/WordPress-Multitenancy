@@ -1,13 +1,13 @@
 {
     "sites": [
         {
-            "url": "site1.test"
+            "url": "wp1.test"
         },
         {
-            "url": "site2.test"
+            "url": "wp2.test"
         },
         {
-            "url": "site3.test"
+            "url": "333.test"
         }
     ]
 }

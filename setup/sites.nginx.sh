@@ -31,23 +31,26 @@ function ngnixCreateBlockFile(){
     local pathAvailable="$PATH_NGNIX/sites-available"
 
     sudo cp "$pathAvailable/example" "$pathAvailable/$siteUrl"
-    sed -i "s|@SITE_URL|$siteUrl|g" "$pathAvailable/$siteUrl"
+    sudo sed -i "s|@SITE_URL|$siteUrl|g" "$pathAvailable/$siteUrl"
 
 }
 
 function ngnixEnableSite(){
     local siteUrl=$1
+    local pathAvailable="$PATH_NGNIX/sites-available"
     local pathEnabled="$PATH_NGNIX/sites-enabled"
     # Create symbolic links
+
     sudo ln -sf "$pathAvailable/$siteUrl" "$pathEnabled/"
 }
+
 function directoryPublicCreate(){
     local siteUrl=$1
     cp -TR "$PATH_SITE_DIR/example" "$PATH_SITE_DIR/$siteUrl"
 }
 
 function directoryPublicClean(){
-    rm -r /var/www/public/*/
+    sudo rm -r /var/www/public/*/
 }
 
 function ngnixCleanAvailable(){
@@ -57,7 +60,7 @@ function ngnixCleanAvailable(){
 }
 function ngnixCleanEnabled(){
     local pathEnabled="$PATH_NGNIX/sites-enabled"
-    rm -r /etc/nginx/sites-enabled/*
+    sudo rm -r /etc/nginx/sites-enabled/*
 }
 
 function siteSetup(){

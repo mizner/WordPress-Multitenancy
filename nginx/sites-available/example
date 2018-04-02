@@ -1,13 +1,19 @@
+
 server {
-        listen 80;
-        listen [::]:80;
+    listen 80;
+    listen [::]:80;
 
-        root /var/www/@SITE_URL;
-        index index.php index.html index.htm index.nginx-debian.html;
+    server_name @SITE_URL www.@SITE_URL;
 
-        server_name @SITE_URL www.@SITE_URL;
+    root /var/www/public/@SITE_URL;
+    index index.php index.html;
 
-        location / {
-                try_files $uri $uri/ =404;
-        }
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    }
 }

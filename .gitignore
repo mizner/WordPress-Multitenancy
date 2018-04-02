@@ -5,8 +5,7 @@
 # Ngnix
 nginx/*
 !nginx/sites-available/default
-!nginx/sites-available/example.scotchbox
-!nginx/sites-available/example.old
+!nginx/sites-available/example
 !nginx/sites-available/example.ngnix.default
 
 # Sites
