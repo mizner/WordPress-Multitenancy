@@ -23,8 +23,8 @@ WELCOME_MESSAGE='
  🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀
 '
 INSTALL_CORE_ADDONS=1
-INSTALL_PHP_ADDONS=0
-INSTALL_MYSQL=0
+INSTALL_PHP_ADDONS=1
+INSTALL_MYSQL=1
 INSTALL_REDIS=0
 
 # /*=================================
@@ -70,6 +70,8 @@ sudo apt-get install -y ifupdown
 # =            INSTALL NGINX            =
 # =====================================*/
 # Install Nginx
+sudo add-apt-repository -y ppa:ondrej/nginx-mainline # Super Latest Version
+sudo apt-get update
 sudo apt-get -y install nginx
 sudo systemctl enable nginx
 
@@ -116,7 +118,6 @@ if [ $INSTALL_PHP_ADDONS == 1 ]; then
     sudo apt-get -y install php7.2-bz2
     sudo apt-get -y install php7.2-cgi
     sudo apt-get -y install php7.2-cli
-    sudo apt-get -y install php7.2-fpm
     sudo apt-get -y install php7.2-gd
     sudo apt-get -y install php7.2-imap
     sudo apt-get -y install php7.2-intl
