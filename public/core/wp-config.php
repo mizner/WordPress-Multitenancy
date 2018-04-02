@@ -1,4 +1,6 @@
 <?php
+define('SL_DB_IP', '192.168.33.44');
+define('SL_DB_PORT', '3306');
 
 define('SL_BUSINESS_TITLE', 'Simple Launch');
 define('SL_BUSINESS_LINK', '//simplelaun.ch');
