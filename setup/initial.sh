@@ -99,45 +99,18 @@ sudo systemctl start php7.2-fpm
 echo 'cgi.fix_pathinfo = 0' | sudo tee -a /etc/php/7.2/fpm/conf.d/user.ini
 sudo systemctl restart php7.2-fpm
 
-    # Add index.php to readable file types and enable PHP FPM since PHP alone won't work
-    MY_WEB_CONFIG='server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-
-        root /var/www/public;
-        index index.php index.html index.htm index.nginx-debian.html;
-
-        server_name _;
-
-        location = /favicon.ico { access_log off; log_not_found off; }
-        location = /robots.txt  { access_log off; log_not_found off; }
-
-        location / {
-            try_files $uri $uri/ /index.php?$query_string;
-        }
-
-        location ~ \.php$ {
-            include snippets/fastcgi-php.conf;
-            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
-        }
-
-        location ~ /\.ht {
-            deny all;
-        }
-    }'
-    echo "$MY_WEB_CONFIG" | sudo tee /etc/nginx/sites-available/default
-
-    sudo systemctl restart nginx
+sudo systemctl restart nginx
 
 # /*===================================
 # =            PHP MODULES            =
 # ===================================*/
 
-# Base Stuff
-sudo apt-get -y install php7.2-common
-sudo apt-get -y install php7.2-dev
-
 if [ $INSTALL_PHP_ADDONS == 1 ]; then
+
+    # Base Stuff
+    sudo apt-get -y install php7.2-common
+    sudo apt-get -y install php7.2-dev
+
     # Common Useful Stuff (some of these are probably already installed)
     sudo apt-get -y install php7.2-bcmath
     sudo apt-get -y install php7.2-bz2
