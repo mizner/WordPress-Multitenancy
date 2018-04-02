@@ -67,6 +67,7 @@ function wpCreateDB(){
     local siteUrl=$1
     wp db create
 }
+
 function siteSetup(){
     local row=$(echo $1 | base64 --decode )
 
@@ -80,6 +81,11 @@ function siteSetup(){
     sudo ln -sf /var/www/public/core /var/www/public/sites/$siteUrl
     sudo ln -sf /var/www/public/themes /var/www/public/sites/$siteUrl
     sudo ln -sf /var/www/public/plugins /var/www/public/sites/$siteUrl
+
+    ## Database
+    # sudo bash /var/www/setup/bootstrap.mysql.create.sh $siteUrl $siteUrl $siteUrl
+    sudo mysqladmin -uroot -proot create $siteUrl
+    sudo sed -i "s|@SITE_URL|$siteUrl|g" /var/www/public/sites/$siteUrl/wp-tenant-config.php
 }
 
 #echo "Clean Site Directory"
