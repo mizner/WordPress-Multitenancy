@@ -20,7 +20,8 @@ https://www.digitalocean.com/community/tutorials/how-to-move-an-nginx-web-root-t
 * Change PHP CGI Fix Path Info: `sudo sed -i "s|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g" /etc/php/7.2/fpm/php.ini`
 
 
-
+## Vagrant 
+* Create Box: `vagrant package --output wp-multitenancy.box`
 
 ## [Digital Ocean CLI](https://github.com/digitalocean/doctl)
 Droplet: `87951788`
