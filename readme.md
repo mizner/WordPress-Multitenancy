@@ -3,7 +3,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysq
 https://www.digitalocean.com/community/tutorials/how-to-move-an-nginx-web-root-to-a-new-location-on-ubuntu-16-04
 
 
-##
+## WP Multitenancy Setups
 * `bash /var/www/setup/sites.nginx.sh`
 * `vagrant ssh -c "bash /var/www/setup/sites.nginx.sh"`
 
@@ -30,7 +30,7 @@ Droplet: `87951788`
 * List backups "snapshots"
     * `doctl compute snapshot list`
 * Create backup "snapshot"
-    * `doctl compute droplet-action snapshot droplet_ID`
+    * `doctl compute droplet-action snapshot droplet_ID --snapshot-name EXAMPLE`
 * Restore backup 
     * `doctl compute droplet-action restore droplet_ID --image-id image_id`
     * e.g. `doctl compute droplet-action restore 87951788 --image-id 33075700`
@@ -41,7 +41,6 @@ vagrant ssh -c "sudo cp /var/www/nginx/sites-available/example /etc/nginx/sites-
 vagrant ssh -c "sudo ls /etc/nginx/sites-available"
 vagrant ssh -c "sudo ls /etc/nginx/sites-enabled"
 
-vagrant ssh -c "bash /var/www/setup/initial.ngnixfix.sh"
 vagrant ssh -c "sudo bash /var/www/setup/sites.nginx.sh"
 
 # ugh
