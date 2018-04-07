@@ -1,0 +1,54 @@
+{
+  "extra": {
+    "installer-paths": {
+      "mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "composer",
+      "url": "https://composer.deliciousbrains.com/3998821A01BD70FAD9531E70B4F5EE17"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.6.10",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=b3JkZXJfaWQ9MzgzNjF8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTA4LTI3IDE4OjQ1OjU3"
+        }
+      }
+    }
+  ],
+  "require-dev": {
+  },
+  "require": {
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "wpackagist-plugin/imsanity": "^2.3",
+    "wpackagist-plugin/regenerate-thumbnails": "^3.0",
+    "wpackagist-plugin/simple-page-ordering": "^2.3",
+    "deliciousbrains-plugin/wp-migrate-db-pro": "^1.8",
+    "deliciousbrains-plugin/wp-offload-s3": "^1.5",
+    "wpackagist-plugin/wordpress-seo": "^7.0"
+  },
+  "scripts": {
+    "post-install-cmd": [
+    ],
+    "post-update-cmd": [
+    ]
+  }
+}
