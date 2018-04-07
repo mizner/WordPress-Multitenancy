@@ -81,6 +81,7 @@ function siteSetup(){
     sudo ln -sf /var/www/public/core /var/www/public/sites/$siteUrl
     sudo ln -sf /var/www/public/themes /var/www/public/sites/$siteUrl
     sudo ln -sf /var/www/public/plugins /var/www/public/sites/$siteUrl
+    sudo ln -sf /var/www/public/mu-plugins /var/www/public/sites/$siteUrl
 
     ## Database
     # sudo bash /var/www/setup/bootstrap.mysql.create.sh $siteUrl $siteUrl $siteUrl
