@@ -3,6 +3,9 @@
 /.vagrant
 debug.log
 
+# Composer
+/public/vendor
+
 # Ngnix
 nginx/*
 !nginx/sites-available/default
